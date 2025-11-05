@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+}
+/* Evita scroll horizontal raro */
+body {
+  overflow-x: hidden;
+  position: relative; /* importante para sticky nav y acordeón */
+}
+
+/* Tailwind ya maneja mucho, pero podemos reforzar */
+section {
+  scroll-margin-top: 80px; /* evita que navbar cubra secciones al hacer anchor links */
+}
+
+/* Botón "Volver arriba" fijo */
+#back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #1d4ed8; /* azul Tailwind */
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: none; /* se muestra con JS cuando scrollY > X */
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+#back-to-top:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
