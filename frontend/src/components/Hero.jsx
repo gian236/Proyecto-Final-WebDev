@@ -37,7 +37,7 @@ const Hero = () => {
         muted
         playsInline
       >
-        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source src="/videos/hero.webm" type="video/webm" />
         Tu navegador no soporta video.
       </video>
 

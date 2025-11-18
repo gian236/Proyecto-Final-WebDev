@@ -36,3 +36,8 @@ section {
   background-color: #2563eb;
   transform: scale(1.05);
 }
+
+/* Optimización de rendimiento para animaciones GSAP */
+.gsap-animated {
+  will-change: transform, opacity;
+}

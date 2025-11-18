@@ -9,9 +9,9 @@ const NavbarComponent = () => {
         <BsNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BsNavbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#services">Servicios</Nav.Link>
-            <Nav.Link href="#register">Regístrate</Nav.Link>
-            <Nav.Link href="#login">Iniciar Sesión</Nav.Link>
+            <Nav.Link href="/services">Servicios</Nav.Link>
+            <Nav.Link href="/register">Regístrate</Nav.Link>
+            <Nav.Link href="/login">Iniciar Sesión</Nav.Link>
           </Nav>
         </BsNavbar.Collapse>
       </Container>

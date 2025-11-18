@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   { img: "/images/service1.svg", name: "Plomería" },
@@ -22,23 +21,29 @@ const Services = () => {
   };
 
   useEffect(() => {
-    servicesRef.current.forEach((el, i) => {
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-          },
-          delay: i * 0.2,
-        }
-      );
+    let ctx = gsap.context(() => {
+      servicesRef.current.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom-=100",
+              toggleActions: "play none none reverse",
+              batch: true
+            },
+            delay: i * 0.15,
+          }
+        );
+      });
     });
+    
+    return () => ctx.revert(); // Cleanup on unmount
   }, []);
 
   return (
@@ -51,7 +56,7 @@ const Services = () => {
           <div
             key={i}
             ref={addToRefs}
-            className="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-xl transition-all"
+            className="gsap-animated bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-xl transition-all"
           >
             <img
               src={s.img}
