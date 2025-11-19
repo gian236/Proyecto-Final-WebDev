@@ -16,9 +16,7 @@ def create_service(service: schemas.ServiceCreate, db: Session = Depends(get_db)
 def get_services(db: Session = Depends(get_db)):
     return crud.get_services(db)
 
-# ⚠️ IMPORTANTE: /search debe estar ANTES de /{service_id}
-# porque FastAPI evalúa las rutas en orden y "search" podría
-# ser interpretado como un service_id si está después
+
 @router.get("/search", response_model=list[schemas.ServiceOut])
 def search_services(
     db: Session = Depends(get_db),
