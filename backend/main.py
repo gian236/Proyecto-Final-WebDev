@@ -8,11 +8,20 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Backend de Marketplace de Servicios")
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # --- CORS ---
 origins = [
-    "http://localhost:3000",  # frontend React
-    "http://127.0.0.1:3000",  # por si React corre con esta URL
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
+
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS")
+if allowed_origins_env:
+    origins.extend([origin.strip() for origin in allowed_origins_env.split(",")])
 
 app.add_middleware(
     CORSMiddleware,
