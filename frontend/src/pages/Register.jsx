@@ -9,6 +9,7 @@ export default function Register() {
     name: "",
     email: "",
     phone: "",
+    location: "",
     role: "contratador",
     password: "",
   });
@@ -77,6 +78,13 @@ export default function Register() {
             name="phone"
             placeholder="Teléfono"
             value={form.phone}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+          <input
+            name="location"
+            placeholder="Ubicación (Ciudad, País)"
+            value={form.location}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
           />

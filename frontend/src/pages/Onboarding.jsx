@@ -1,5 +1,6 @@
 // src/pages/Onboarding.jsx
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Onboarding({ userId, onComplete }) {
   const [skills, setSkills] = useState([]);
@@ -7,6 +8,7 @@ export default function Onboarding({ userId, onComplete }) {
   const [services, setServices] = useState([{ title: "", description: "", price: "", skill_id: "" }]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   // Traer skills desde backend
   useEffect(() => {
@@ -48,10 +50,10 @@ export default function Onboarding({ userId, onComplete }) {
       // 1️⃣ Asociar todas las skills en un solo POST
       if (selectedSkills.length > 0) {
         const res = await fetch(`http://localhost:8000/users/${userId}/skills`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(selectedSkills), // <-- enviamos array completo
-                });
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ skill_ids: selectedSkills }), // <-- enviamos objeto con skill_ids
+        });
 
         if (!res.ok) throw new Error("No se pudieron asignar las skills");
       }
@@ -73,7 +75,14 @@ export default function Onboarding({ userId, onComplete }) {
         });
       }
 
-      // 3️⃣ Finalizar onboarding
+      // 3️⃣ Obtener datos del usuario y guardar sesión
+      const userRes = await fetch(`http://localhost:8000/users/${userId}`);
+      if (userRes.ok) {
+        const userData = await userRes.json();
+        login("fake-jwt-token", userData);
+      }
+
+      // 4️⃣ Finalizar onboarding
       onComplete();
     } catch (err) {
       console.error(err);
@@ -97,9 +106,8 @@ export default function Onboarding({ userId, onComplete }) {
             {Array.isArray(skills) && skills.map(skill => (
               <label
                 key={skill.id}
-                className={`px-3 py-1 rounded-full border cursor-pointer ${
-                  selectedSkills.includes(skill.id) ? "bg-blue-500 text-white" : "bg-gray-100"
-                }`}
+                className={`px-3 py-1 rounded-full border cursor-pointer ${selectedSkills.includes(skill.id) ? "bg-blue-500 text-white" : "bg-gray-100"
+                  }`}
               >
                 <input
                   type="checkbox"

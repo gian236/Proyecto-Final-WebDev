@@ -1,9 +1,13 @@
 // src/pages/Login.jsx
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-export default function Login({ onLoginSuccess }) {
+export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,8 +31,10 @@ export default function Login({ onLoginSuccess }) {
       }
 
       const data = await res.json();
-      localStorage.setItem("token", data.access_token);
-      onLoginSuccess(); // redirige a home
+      login(data.access_token, data.user);
+
+      // Redirect to profile for all users
+      navigate('/profile');
     } catch (err) {
       setError("No se pudo conectar con el servidor");
     }

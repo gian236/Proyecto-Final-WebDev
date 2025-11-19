@@ -50,6 +50,30 @@ def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 
+def update_user(db: Session, user_id: int, user_update: schemas.UserUpdate):
+    """Actualizar información del usuario"""
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not db_user:
+        return None
+    
+    # Update only provided fields
+    if user_update.name is not None:
+        db_user.name = user_update.name
+    if user_update.phone is not None:
+        db_user.phone = user_update.phone
+    if user_update.profile_picture_url is not None:
+        db_user.profile_picture_url = user_update.profile_picture_url
+    if user_update.location is not None:
+        db_user.location = user_update.location
+    if user_update.bio is not None:
+        db_user.bio = user_update.bio
+    
+    db_user.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+
 # ==========================
 # Servicios
 # ==========================
@@ -128,6 +152,43 @@ def search_services(
     return q.all()
 
 
+def update_service(db: Session, service_id: int, service: schemas.ServiceUpdate):
+    """Actualizar un servicio existente"""
+    db_service = db.query(models.Service).filter(models.Service.id == service_id).first()
+    if not db_service:
+        return None
+    
+    # Update only provided fields
+    if service.title is not None:
+        db_service.title = service.title
+    if service.description is not None:
+        db_service.description = service.description
+    if service.price is not None:
+        db_service.price = service.price
+    if service.skill_id is not None:
+        db_service.skill_id = service.skill_id
+    if service.is_active is not None:
+        db_service.is_active = service.is_active
+    if service.image_url is not None:
+        db_service.image_url = service.image_url
+    
+    db.commit()
+    db.refresh(db_service)
+    return db_service
+
+
+def delete_service(db: Session, service_id: int):
+    """Eliminar un servicio"""
+    db_service = db.query(models.Service).filter(models.Service.id == service_id).first()
+    if not db_service:
+        return None
+    
+    db.delete(db_service)
+    db.commit()
+    return True
+
+
+
 # ==========================
 # Skills
 # ==========================
@@ -135,15 +196,57 @@ def get_skills(db: Session):
     return db.query(models.Skill).all()
 
 def assign_skills(db: Session, user_id: int, skill_ids: list[int]):
-    # Primero borramos las skills existentes del usuario (opcional)
-    db.query(models.UserSkill).filter(models.UserSkill.user_id == user_id).delete()
-
-    # Ahora agregamos las nuevas skills
+    # Agregamos las nuevas skills si no existen
     for skill_id in skill_ids:
-        db_skill = models.UserSkill(user_id=user_id, skill_id=skill_id)
-        db.add(db_skill)
+        # Verificar si ya existe
+        existing_skill = db.query(models.UserSkill).filter(
+            models.UserSkill.user_id == user_id,
+            models.UserSkill.skill_id == skill_id
+        ).first()
+        
+        if not existing_skill:
+            db_skill = models.UserSkill(user_id=user_id, skill_id=skill_id)
+            db.add(db_skill)
+            
     db.commit()
 
     return {"user_id": user_id, "skills_assigned": skill_ids}
 
 
+def get_user_skills(db: Session, user_id: int):
+    """Obtener todas las skills de un usuario"""
+    user_skills = db.query(models.UserSkill).filter(models.UserSkill.user_id == user_id).all()
+    return user_skills
+
+
+def remove_user_skill(db: Session, user_id: int, skill_id: int):
+    """Eliminar una skill de un usuario"""
+    user_skill = db.query(models.UserSkill).filter(
+        models.UserSkill.user_id == user_id,
+        models.UserSkill.skill_id == skill_id
+    ).first()
+    
+    if not user_skill:
+        return None
+    
+    db.delete(user_skill)
+    db.commit()
+    return {"message": "Skill eliminada exitosamente", "user_id": user_id, "skill_id": skill_id}
+
+
+def get_services_by_vendor(db: Session, vendor_id: int):
+    """Obtener todos los servicios de un vendedor"""
+    services = db.query(models.Service).filter(models.Service.vendor_id == vendor_id).all()
+    return services
+
+
+def get_jobs_by_vendor(db: Session, vendor_id: int):
+    """Obtener todos los trabajos donde el usuario es el vendedor"""
+    jobs = db.query(models.Job).filter(models.Job.vendor_id == vendor_id).all()
+    return jobs
+
+
+def get_jobs_by_contractor(db: Session, contractor_id: int):
+    """Obtener todos los trabajos donde el usuario es el contratador"""
+    jobs = db.query(models.Job).filter(models.Job.contractor_id == contractor_id).all()
+    return jobs

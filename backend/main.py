@@ -2,11 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from . import models
 from .database import engine
-from .routers import users, services, skills
-import sys
-import os
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from .routers import users, services, skills, jobs, reviews
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -30,6 +26,8 @@ app.add_middleware(
 app.include_router(users.router)
 app.include_router(services.router)
 app.include_router(skills.router)
+app.include_router(jobs.router)
+app.include_router(reviews.router)
 
 @app.get("/")
 def root():

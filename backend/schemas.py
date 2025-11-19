@@ -10,6 +10,9 @@ class UserBase(BaseModel):
     email: EmailStr
     phone: Optional[str] = None
     role: str  # "vendedor" o "contratador"
+    profile_picture_url: Optional[str] = None
+    location: Optional[str] = None
+    bio: Optional[str] = None
 
 class UserCreate(UserBase):
     password: str  # viene sin hash desde el frontend
@@ -26,6 +29,15 @@ class UserOut(UserBase):
 class UserLogin(BaseModel):
     email: str
     password: str
+
+
+# Schema for updating user profile
+class UserUpdate(BaseModel):
+    name: Optional[str] = None
+    phone: Optional[str] = None
+    profile_picture_url: Optional[str] = None
+    location: Optional[str] = None
+    bio: Optional[str] = None
 
 
 # ==========================
@@ -62,10 +74,19 @@ class ServiceBase(BaseModel):
     description: Optional[str] = None
     price: float
     is_active: Optional[bool] = True
+    image_url: Optional[str] = None
 
 class ServiceCreate(ServiceBase):
     vendor_id: int
     skill_id: int  # 🔹 nueva línea
+
+class ServiceUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = None
+    skill_id: Optional[int] = None
+    is_active: Optional[bool] = None
+    image_url: Optional[str] = None
 
 class ServiceOut(ServiceBase):
     id: int
@@ -93,6 +114,8 @@ class JobCreate(JobBase):
 
 class JobOut(JobBase):
     id: int
+    client_confirmed: bool
+    vendor_confirmed: bool
     created_at: Optional[datetime]
     contractor_user: UserOut
     vendor_user: UserOut

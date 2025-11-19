@@ -17,6 +17,9 @@ class User(Base):
     password_hash = Column(Text, nullable=False)
     phone = Column(String(20))
     role = Column(String(20), nullable=False)  # vendedor / contratador
+    profile_picture_url = Column(Text)  # URL or path to profile picture
+    location = Column(String(200))  # User location
+    bio = Column(Text)  # User biography
     created_at = Column(TIMESTAMP)
     updated_at = Column(TIMESTAMP)
 
@@ -66,6 +69,7 @@ class Service(Base):
     description = Column(Text)
     price = Column(Numeric(10, 2), nullable=False)
     is_active = Column(Boolean, default=True)
+    image_url = Column(Text, nullable=True)  # Nueva: foto del servicio
     created_at = Column(TIMESTAMP)
 
     # Relaciones
@@ -88,6 +92,8 @@ class Job(Base):
     start_date = Column(Date)
     end_date = Column(Date)
     total_amount = Column(Numeric(10, 2))
+    client_confirmed = Column(Boolean, default=False)
+    vendor_confirmed = Column(Boolean, default=False)
     created_at = Column(TIMESTAMP)
 
     service = relationship("Service", back_populates="jobs")
