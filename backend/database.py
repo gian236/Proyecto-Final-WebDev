@@ -2,8 +2,18 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Cambia estos valores a los de tu base de datos RDS/local
-DATABASE_URL = "postgresql+psycopg2://admin:admin123@localhost:5432/postgres"
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("No se encontró la variable de entorno DATABASE_URL. Asegúrate de tener un archivo .env o configurar las variables en Render.")
+
+# Fix para Render/SQLAlchemy: postgres:// -> postgresql://
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
