@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 
 const Hero = () => {
@@ -37,7 +38,7 @@ const Hero = () => {
         muted
         playsInline
       >
-        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source src="/videos/hero.webm" type="video/webm" />
         Tu navegador no soporta video.
       </video>
 
@@ -52,12 +53,13 @@ const Hero = () => {
         <p ref={subtitleRef} className="text-lg md:text-xl max-w-xl mb-6">
           Conecta con profesionales de servicios domésticos y técnicos de manera rápida, segura y confiable.
         </p>
-        <button
+        <Link
+          to="/register"
           ref={buttonRef}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded text-white font-semibold transition-all duration-300"
         >
           Comienza ahora
-        </button>
+        </Link>
       </div>
     </section>
   );
