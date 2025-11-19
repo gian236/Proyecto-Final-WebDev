@@ -1,61 +1,528 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ServiLink - Tu Plataforma de Servicios Locales</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Local overrides -->
+  <title>ServiLink - Presentación del Proyecto</title>
+  <meta name="description"
+    content="Plataforma que conecta clientes con profesionales locales de forma segura y eficiente">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'poppins': ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            'primary': '#1d4ed8',
+            'primary-dark': '#1e40af',
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
-  <!-- Navbar (Bootstrap) -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">ServiLink</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#info">Proyecto</a></li>
-          <li class="nav-item"><a class="nav-link" href="#funciona">Cómo Funciona</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-        </ul>
+
+<body class="font-poppins bg-gray-50 text-gray-900 transition-colors duration-300">
+
+  <!-- Navbar -->
+  <nav id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="#inicio"
+          class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          ServiLink
+        </a>
+
+        <div class="hidden md:flex space-x-8">
+          <a href="#inicio" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Inicio</a>
+          <a href="#proyecto" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Proyecto</a>
+          <a href="#arquitectura" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Arquitectura</a>
+          <a href="#monetizacion" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Modelo</a>
+          <a href="#roadmap" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Roadmap</a>
+        </div>
+
+        <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+          🌙
+        </button>
       </div>
-      <button id="darkModeToggle" class="btn btn-outline-secondary ms-2">🌙</button>
     </div>
   </nav>
 
-  <!-- NOTE: Hero removed to emphasize information (can be re-added later) -->
+  <!-- Hero Section -->
+  <section id="inicio" class="pt-32 pb-20 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 -z-10"></div>
+    <div class="absolute inset-0 opacity-30 -z-10"
+      style="background-image: radial-gradient(circle at 1px 1px, rgba(99, 102, 241, 0.15) 1px, transparent 0); background-size: 40px 40px;">
+    </div>
 
-  <!-- Información del Proyecto (enfatizada con Bootstrap) -->
-  <section id="info" class="info py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-8">
-          <h2 class="display-6 mb-3">Sobre el Proyecto</h2>
-          <p class="lead">
-            <strong>ServiLink</strong> conecta clientes con profesionales locales (plomería, jardinería, electricidad, limpieza, carpintería y más) de forma sencilla y segura.
+    <div class="max-w-6xl mx-auto text-center">
+      <div class="inline-block mb-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+        🚀 Proyecto Final - Desarrollo Web
+      </div>
+
+      <h1
+        class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
+        ServiLink
+      </h1>
+
+      <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+        Conectando clientes con profesionales locales de forma <span class="font-semibold text-blue-600">segura</span>,
+        <span class="font-semibold text-purple-600">rápida</span> y <span
+          class="font-semibold text-pink-600">confiable</span>
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <a href="#proyecto"
+          class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all">
+          Ver Proyecto
+        </a>
+        <a href="#arquitectura"
+          class="px-8 py-3 bg-white text-gray-700 rounded-lg font-semibold border-2 border-gray-200 hover:border-blue-600 hover:text-blue-600 transition-all">
+          Arquitectura Técnica
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+          <div class="text-3xl font-bold text-blue-600">6+</div>
+          <div class="text-sm text-gray-600">Categorías</div>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+          <div class="text-3xl font-bold text-purple-600">100%</div>
+          <div class="text-sm text-gray-600">Seguro</div>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+          <div class="text-3xl font-bold text-pink-600">24/7</div>
+          <div class="text-sm text-gray-600">Disponible</div>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+          <div class="text-3xl font-bold text-indigo-600">⭐</div>
+          <div class="text-sm text-gray-600">Reseñas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre el Proyecto -->
+  <section id="proyecto" class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Sobre el Proyecto</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Una plataforma moderna que revoluciona la forma de contratar servicios locales
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div>
+          <h3 class="text-3xl font-bold mb-6">¿Qué es ServiLink?</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            <strong class="text-gray-900">ServiLink</strong> es una plataforma web que conecta clientes con
+            profesionales locales en diversas categorías: plomería, jardinería, electricidad, limpieza, carpintería y
+            más.
           </p>
-          <p>
-            Inspirada en plataformas como <em>Uber</em> o <em>Fiverr</em>, su objetivo es facilitar el contacto local, generar oportunidades laborales y ofrecer transacciones confiables.
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            Inspirada en el modelo de <em>Uber</em> y <em>Fiverr</em>, nuestra plataforma facilita el contacto directo
+            entre quienes necesitan un servicio y quienes lo ofrecen, garantizando transacciones seguras y
+            transparentes.
           </p>
-          <ul class="list-group list-group-flush my-3">
-            <li class="list-group-item">Perfiles verificados y reseñas</li>
-            <li class="list-group-item">Filtros por categoría y distancia</li>
-            <li class="list-group-item">Pagos y comunicación seguros</li>
-          </ul>
-          <a href="#contacto" class="btn btn-primary btn-lg mt-3">Quiero más información</a>
+          <p class="text-gray-600 leading-relaxed">
+            El objetivo es crear oportunidades laborales para profesionales independientes mientras ofrecemos a los
+            clientes una forma confiable de encontrar servicios de calidad en su área.
+          </p>
         </div>
-        <div class="col-lg-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Beneficios clave</h5>
-              <p class="card-text">Conexión rápida con profesionales locales, control de calidad y opciones de contratación flexibles.</p>
-              <a href="#funciona" class="btn btn-outline-primary w-100">Cómo funciona</a>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white">
+            <div class="text-4xl mb-2">🔍</div>
+            <h4 class="font-semibold mb-2">Búsqueda Inteligente</h4>
+            <p class="text-sm text-blue-100">Filtros por categoría y rating</p>
+          </div>
+          <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-2xl text-white">
+            <div class="text-4xl mb-2">✅</div>
+            <h4 class="font-semibold mb-2">Perfiles Verificados</h4>
+            <p class="text-sm text-purple-100">Profesionales con reseñas reales</p>
+          </div>
+          <div class="bg-gradient-to-br from-pink-500 to-pink-600 p-6 rounded-2xl text-white">
+            <div class="text-4xl mb-2">💼</div>
+            <h4 class="font-semibold mb-2">Gestión de Trabajos</h4>
+            <p class="text-sm text-pink-100">Sistema completo de estados</p>
+          </div>
+          <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 p-6 rounded-2xl text-white">
+            <div class="text-4xl mb-2">⭐</div>
+            <h4 class="font-semibold mb-2">Sistema de Reseñas</h4>
+            <p class="text-sm text-indigo-100">Calificaciones transparentes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Arquitectura Técnica -->
+  <section id="arquitectura" class="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Arquitectura Técnica</h2>
+        <p class="text-xl text-gray-600">Stack tecnológico moderno y escalable</p>
+        <p class="text-sm text-gray-500 mt-2">✓ = Implementado | ○ = Planificado</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <!-- Frontend -->
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mr-4">
+              ⚛️
+            </div>
+            <h3 class="text-2xl font-bold">Frontend</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>React 19</strong> - Biblioteca principal para UI interactiva</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Bootstrap 5</strong> - Framework CSS para componentes responsivos</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Tailwind CSS</strong> - Utilidades CSS para diseño personalizado</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>React Router DOM</strong> - Navegación SPA fluida</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>GSAP</strong> - Animaciones avanzadas y transiciones</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Lenis</strong> - Smooth scrolling de alta calidad</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>React Icons</strong> - Biblioteca de iconos</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Backend -->
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-2xl mr-4">
+              🚀
+            </div>
+            <h3 class="text-2xl font-bold">Backend</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>FastAPI</strong> - Framework asíncrono de alto rendimiento</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Python 3.x</strong> - Lenguaje moderno y eficiente</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Pydantic</strong> - Validación de datos con schemas</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>CORS Middleware</strong> - Comunicación segura frontend-backend</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-gray-400 mr-2 font-bold">○</span>
+              <div class="text-gray-500"><strong>JWT Auth</strong> - Autenticación con tokens (planificado)</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Database -->
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-2xl mr-4">
+              🗄️
+            </div>
+            <h3 class="text-2xl font-bold">Base de Datos</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>PostgreSQL 16</strong> - Base de datos relacional robusta</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>SQLAlchemy ORM</strong> - Manejo eficiente de modelos y relaciones</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Psycopg2</strong> - Adaptador PostgreSQL para Python</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-gray-400 mr-2 font-bold">○</span>
+              <div class="text-gray-500"><strong>Alembic</strong> - Migraciones de BD (planificado)</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-gray-400 mr-2 font-bold">○</span>
+              <div class="text-gray-500"><strong>PostGIS</strong> - Geolocalización (planificado)</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DevOps -->
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-2xl mr-4">
+              🐳
+            </div>
+            <h3 class="text-2xl font-bold">DevOps & Deploy</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Docker</strong> - Contenedorización de PostgreSQL</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2 font-bold">✓</span>
+              <div><strong>Docker Compose</strong> - Orquestación de base de datos</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-gray-400 mr-2 font-bold">○</span>
+              <div class="text-gray-500"><strong>GitHub Actions</strong> - CI/CD (planificado)</div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-gray-400 mr-2 font-bold">○</span>
+              <div class="text-gray-500"><strong>Cloud Deploy</strong> - AWS/Azure (planificado)</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Diagrama de Arquitectura -->
+      <div class="bg-white rounded-2xl p-8 shadow-xl">
+        <h3 class="text-2xl font-bold mb-6 text-center">Flujo de la Aplicación</h3>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+          <div class="bg-blue-100 px-6 py-4 rounded-lg font-semibold">Cliente (React 19)</div>
+          <div class="text-2xl">→</div>
+          <div class="bg-green-100 px-6 py-4 rounded-lg font-semibold">API REST (FastAPI)</div>
+          <div class="text-2xl">→</div>
+          <div class="bg-purple-100 px-6 py-4 rounded-lg font-semibold">PostgreSQL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modelo de Negocio y Monetización -->
+  <section id="monetizacion" class="py-20 px-4 bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Modelo de Negocio</h2>
+        <p class="text-xl text-gray-600">Conectando talento local con necesidades reales</p>
+      </div>
+
+      <!-- Concepto General -->
+      <div class="bg-white rounded-2xl p-8 shadow-xl mb-12">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h3 class="text-2xl font-bold mb-4 text-blue-600">¿Cómo funciona?</h3>
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              ServiLink opera bajo un modelo de <strong>Marketplace de Servicios Locales</strong>, similar a plataformas
+              como <em>Uber</em> o <em>Fiverr</em>, pero enfocado en necesidades domésticas y técnicas.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              Facilitamos la conexión fluida y transparente entre clientes que buscan soluciones rápidas y profesionales
+              que buscan oportunidades de trabajo.
+            </p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4 text-blue-600">👷</div>
+                <div>
+                  <h4 class="font-bold text-gray-900">Para Trabajadores</h4>
+                  <p class="text-sm text-gray-600">Perfil detallado, tarifas, disponibilidad y exposición a clientes
+                    locales.</p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-purple-100 p-2 rounded-lg mr-4 text-purple-600">🏠</div>
+                <div>
+                  <h4 class="font-bold text-gray-900">Para Clientes</h4>
+                  <p class="text-sm text-gray-600">Búsqueda por categoría, reseñas verificadas y contratación segura.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fuentes de Ingreso -->
+      <h3 class="text-2xl font-bold mb-8 text-center">Fuentes de Ingreso</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Comisiones -->
+        <div
+          class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border-t-4 border-green-500">
+          <div class="text-4xl mb-4">💸</div>
+          <h4 class="text-xl font-bold mb-3">Comisiones</h4>
+          <p class="text-gray-600 text-sm mb-4">Cobro de un porcentaje sobre cada transacción completada.</p>
+          <ul class="text-sm text-green-700 bg-green-50 p-3 rounded-lg">
+            <li class="mb-1">✓ Transacciones seguras</li>
+            <li>✓ Modelo escalable</li>
+          </ul>
+        </div>
+
+        <!-- Publicidad -->
+        <div
+          class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border-t-4 border-blue-500">
+          <div class="text-4xl mb-4">📢</div>
+          <h4 class="text-xl font-bold mb-3">Publicidad</h4>
+          <p class="text-gray-600 text-sm mb-4">Espacios destacados para proveedores relacionados.</p>
+          <ul class="text-sm text-blue-700 bg-blue-50 p-3 rounded-lg">
+            <li class="mb-1">✓ Anuncios segmentados</li>
+            <li>✓ Alianzas estratégicas</li>
+          </ul>
+        </div>
+
+        <!-- Suscripciones -->
+        <div
+          class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border-t-4 border-purple-500">
+          <div class="text-4xl mb-4">⭐</div>
+          <h4 class="text-xl font-bold mb-3">Suscripciones</h4>
+          <p class="text-gray-600 text-sm mb-4">Planes Premium para mayor visibilidad y beneficios.</p>
+          <ul class="text-sm text-purple-700 bg-purple-50 p-3 rounded-lg">
+            <li class="mb-1">✓ Perfiles destacados</li>
+            <li>✓ Menores comisiones</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section id="roadmap" class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Roadmap del Proyecto</h2>
+        <p class="text-xl text-gray-600">Fases de desarrollo e implementación</p>
+      </div>
+
+      <div class="space-y-8">
+        <!-- Fase 1 -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border-l-4 border-green-500">
+          <div class="flex items-start">
+            <div
+              class="bg-green-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
+              ✓</div>
+            <div class="flex-1">
+              <div class="flex items-center mb-2">
+                <h3 class="text-2xl font-bold mr-3">Fase 1: MVP</h3>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Completado</span>
+              </div>
+              <p class="text-gray-600 mb-3">Desarrollo del producto mínimo viable con funcionalidades core</p>
+              <ul class="grid md:grid-cols-2 gap-2 text-sm text-gray-700">
+                <li>✓ Sistema de autenticación</li>
+                <li>✓ Perfiles de usuario</li>
+                <li>✓ Publicación de servicios</li>
+                <li>✓ Búsqueda y filtros</li>
+                <li>✓ Sistema de reseñas</li>
+                <li>✓ Gestión de trabajos</li>
+                <li>✓ Confirmación bidireccional</li>
+                <li>✓ Sistema de habilidades</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border-l-4 border-blue-500">
+          <div class="flex items-start">
+            <div
+              class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
+              2</div>
+            <div class="flex-1">
+              <div class="flex items-center mb-2">
+                <h3 class="text-2xl font-bold mr-3">Fase 2: Mejoras UX/UI</h3>
+                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">En Progreso</span>
+              </div>
+              <p class="text-gray-600 mb-3">Optimización de la experiencia de usuario y diseño visual</p>
+              <ul class="grid md:grid-cols-2 gap-2 text-sm text-gray-700">
+                <li>✓ Animaciones GSAP y Lenis</li>
+                <li>✓ Diseño responsive</li>
+                <li>✓ Imágenes de perfil</li>
+                <li>• Dashboard interactivo</li>
+                <li>• Notificaciones en tiempo real</li>
+                <li>• Sistema de mensajería</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border-l-4 border-purple-500">
+          <div class="flex items-start">
+            <div
+              class="bg-purple-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
+              3</div>
+            <div class="flex-1">
+              <div class="flex items-center mb-2">
+                <h3 class="text-2xl font-bold mr-3">Fase 3: Features Avanzados</h3>
+                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold">Planificado</span>
+              </div>
+              <p class="text-gray-600 mb-3">Implementación de funcionalidades premium</p>
+              <ul class="grid md:grid-cols-2 gap-2 text-sm text-gray-700">
+                <li>• Pagos (Stripe/PayPal)</li>
+                <li>• Geolocalización PostGIS</li>
+                <li>• Calendario disponibilidad</li>
+                <li>• Sistema de escrow</li>
+                <li>• Analytics para vendors</li>
+                <li>• Migraciones Alembic</li>
+                <li>• Autenticación JWT</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border-l-4 border-pink-500">
+          <div class="flex items-start">
+            <div
+              class="bg-pink-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
+              4</div>
+            <div class="flex-1">
+              <div class="flex items-center mb-2">
+                <h3 class="text-2xl font-bold mr-3">Fase 4: Escalabilidad</h3>
+                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold">Futuro</span>
+              </div>
+              <p class="text-gray-600 mb-3">Preparación para crecimiento y expansión</p>
+              <ul class="grid md:grid-cols-2 gap-2 text-sm text-gray-700">
+                <li>• App móvil (React Native)</li>
+                <li>• Microservicios</li>
+                <li>• Cloud Deploy</li>
+                <li>• CI/CD</li>
+                <li>• Machine Learning</li>
+                <li>• API pública</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -63,110 +530,114 @@
     </div>
   </section>
 
-  <!-- Cómo Funciona -->
-  <section id="funciona" class="funciona py-5">
-    <div class="container">
-      <h2 class="mb-4">Cómo lo vamos a vender</h2>
-      <p class="mb-3">Nuestra estrategia comercial combinará modelos de ingreso directos e indirectos para generar flujo sostenible desde el lanzamiento.</p>
+  <!-- Features Técnicos Implementados -->
+  <section id="features" class="py-20 px-4 bg-gradient-to-br from-purple-50 to-pink-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Características Técnicas Implementadas</h2>
+        <p class="text-xl text-gray-600">Lo que ya funciona en el proyecto</p>
+      </div>
 
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Comisión por servicio</h5>
-              <p class="card-text">Cobrar una comisión por cada trabajo realizado (porcentaje sobre la transacción) con opción de tarifas fijas para servicios estándar.</p>
-            </div>
-          </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-4">🔐 Autenticación Segura</h3>
+          <p class="text-blue-100 mb-4">Sistema de registro y login con hash de contraseñas.</p>
+          <ul class="space-y-2 text-sm text-blue-100">
+            <li>✓ Hash con bcrypt</li>
+            <li>✓ Validación de credenciales</li>
+            <li>○ JWT tokens (planificado)</li>
+          </ul>
         </div>
 
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Planes premium y suscripciones</h5>
-              <p class="card-text">Ofrecer planes para profesionales (suscripción mensual/anual) con ventajas: posicionamiento preferente, analíticas y más leads.</p>
-            </div>
-          </div>
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-4">📍 Ubicación de Usuarios</h3>
+          <p class="text-purple-100 mb-4">Sistema de ubicación para servicios locales.</p>
+          <ul class="space-y-2 text-sm text-purple-100">
+            <li>✓ Campo de ubicación</li>
+            <li>○ PostGIS (planificado)</li>
+            <li>○ Búsqueda por proximidad (planificado)</li>
+          </ul>
         </div>
 
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Publicidad y partnerships</h5>
-              <p class="card-text">Espacios publicitarios para proveedores y alianzas con comercios locales; oportunidades de co-marketing y promociones patrocinadas.</p>
-            </div>
-          </div>
+        <div class="bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-4">⭐ Sistema de Reseñas</h3>
+          <p class="text-pink-100 mb-4">Calificaciones y comentarios vinculados a trabajos.</p>
+          <ul class="space-y-2 text-sm text-pink-100">
+            <li>✓ Reseñas asociadas a trabajos</li>
+            <li>✓ Rating numérico</li>
+            <li>✓ Promedio por vendor</li>
+          </ul>
         </div>
 
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Servicios añadidos y upsells</h5>
-              <p class="card-text">Ofrecer seguros opcionales, verificación premium de usuarios y paquetes de soporte que aumentan el ticket medio.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Lead generation y B2B</h5>
-              <p class="card-text">Proveer leads cualificados a empresas y ofrecer soluciones B2B como paneles de gestión para flotas/proveedores grandes.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Comisiones y escrow</h5>
-              <p class="card-text">Modelo seguro de pagos (escrow) para retener fondos hasta la confirmación y aplicar comisiones transparentes.</p>
-            </div>
-          </div>
+        <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-4">🔄 Gestión de Trabajos</h3>
+          <p class="text-indigo-100 mb-4">Sistema completo de estados para el ciclo de vida.</p>
+          <ul class="space-y-2 text-sm text-indigo-100">
+            <li>✓ Estados: Pendiente → En Progreso → Completado</li>
+            <li>✓ Confirmación bidireccional</li>
+            <li>✓ Fechas de inicio y fin</li>
+            <li>✓ Modelo de pagos</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Tecnología / Stack -->
-  <section id="tecnologia" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="mb-3">Stack tecnológico</h2>
-      <p class="mb-4">Para el desarrollo y despliegue proponemos tecnologías modernas y escalables:</p>
-      <div class="row">
-        <div class="col-md-6">
-          <h5>Frontend</h5>
-          <ul>
-            <li>React </li>
-            <li>Bootstrap para componentes y utilidades rápidas</li>
-            <li>Tailwind CSS para utilidades y diseño modular donde se requiera mayor control</li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <h5>Backend y datos</h5>
-          <ul>
-            <li>FastAPI — API rápida, asíncrona y fácil de documentar (OpenAPI)</li>
-            <li>PostgreSQL — base de datos relacional robusta y extensible</li>
-            <li>Posible uso de Redis para caché y colas ligeras</li>
-          </ul>
-        </div>
+  <!-- Contacto / CTA -->
+  <section id="contacto" class="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">¿Interesado en el Proyecto?</h2>
+      <p class="text-xl mb-8 text-blue-100">
+        Esta presentación muestra el desarrollo completo de ServiLink como proyecto final de Desarrollo Web
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="http://localhost:3000" target="_blank"
+          class="px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all">
+          Ver Demo en Vivo
+        </a>
+        <a href="https://github.com" target="_blank"
+          class="px-8 py-3 bg-blue-700 text-white rounded-lg font-semibold border-2 border-white hover:bg-blue-800 transition-all">
+          Ver Código en GitHub
+        </a>
       </div>
-      <p class="mt-3"><strong>Despliegue</strong>: contenedores Docker, CI/CD y servicios en la nube (DigitalOcean / AWS / Azure) según el presupuesto y necesidades.</p>
     </div>
   </section>
 
-  <!-- Contacto -->
-  <section id="contacto" class="contacto">
-    <h2>Contáctanos</h2>
-    <p>¿Tienes dudas o quieres saber más sobre ServiLink?</p>
-    <button class="cta-btn">Enviar Mensaje</button>
-  </section>
-
-  <footer>
-    <p>© 2025 ServiLink | Desarrollado con React, FastAPI y PostgreSQL</p>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">ServiLink</h3>
+          <p class="text-sm">
+            Plataforma de conexión entre clientes y profesionales locales.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Tecnologías</h4>
+          <ul class="text-sm space-y-2">
+            <li>React 19 + Bootstrap 5 + Tailwind</li>
+            <li>FastAPI + Python</li>
+            <li>PostgreSQL + SQLAlchemy</li>
+            <li>Docker + Docker Compose</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Proyecto</h4>
+          <ul class="text-sm space-y-2">
+            <li>Desarrollo Web - Semestre 6</li>
+            <li>2025</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-sm">
+        <p>© 2025 ServiLink | Desarrollado con ❤️ usando React, FastAPI y PostgreSQL</p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Bootstrap JS (bundle incluye Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
+
 </html>
