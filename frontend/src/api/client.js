@@ -1,5 +1,5 @@
 // src/api/client.js
-const API_URL = "http://localhost:8000"; // Ajusta si usas otra IP o puerto
+export const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
 export async function getUsers() {
   const res = await fetch(`${API_URL}/users`);

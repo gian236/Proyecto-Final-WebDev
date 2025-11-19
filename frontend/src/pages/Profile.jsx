@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
 import { FaUser, FaBriefcase, FaEdit, FaTrash, FaPlus, FaStar, FaMoneyBillWave, FaSave, FaTimes, FaChartLine, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendar, FaCheckCircle, FaTimesCircle, FaCamera } from "react-icons/fa";
+import { API_URL } from "../api/client";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function Profile() {
     const fetchUserServices = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`http://localhost:8000/users/${authUser?.id}/services`);
+            const res = await fetch(`${API_URL}/users/${authUser?.id}/services`);
             if (!res.ok) throw new Error("Error al cargar servicios");
             const data = await res.json();
             console.log("Services loaded:", data);
@@ -67,7 +68,7 @@ export default function Profile() {
     const fetchUserJobs = async () => {
         setLoading(true);
         try {
-            const endpoint = isVendor ? `http://localhost:8000/users/${authUser?.id}/jobs-as-vendor` : `http://localhost:8000/users/${authUser?.id}/jobs-as-contractor`;
+            const endpoint = isVendor ? `${API_URL}/users/${authUser?.id}/jobs-as-vendor` : `${API_URL}/users/${authUser?.id}/jobs-as-contractor`;
             const res = await fetch(endpoint);
             if (!res.ok) throw new Error("Error al cargar trabajos");
             const data = await res.json();
@@ -82,7 +83,7 @@ export default function Profile() {
 
     const fetchSkills = async () => {
         try {
-            const res = await fetch("http://localhost:8000/skills/");
+            const res = await fetch(`${API_URL}/skills/`);
             if (!res.ok) throw new Error("Error al cargar skills");
             const data = await res.json();
             setSkills(Array.isArray(data) ? data : []);
@@ -93,7 +94,7 @@ export default function Profile() {
 
     const fetchUserSkills = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/users/${authUser?.id}/skills`);
+            const res = await fetch(`${API_URL}/users/${authUser?.id}/skills`);
             if (!res.ok) throw new Error("Error al cargar user skills");
             const data = await res.json();
             console.log("User skills loaded:", data);
@@ -106,7 +107,7 @@ export default function Profile() {
     const handleAddSkills = async () => {
         try {
             for (const skillId of selectedSkillsToAdd) {
-                await fetch(`http://localhost:8000/users/${authUser?.id}/skills/${skillId}`, { method: "POST" });
+                await fetch(`${API_URL}/users/${authUser?.id}/skills/${skillId}`, { method: "POST" });
             }
             fetchUserSkills();
             setShowSkillsModal(false);
@@ -121,7 +122,7 @@ export default function Profile() {
     const handleRemoveSkill = async (skillId) => {
         if (!window.confirm("¿Eliminar esta skill?")) return;
         try {
-            const res = await fetch(`http://localhost:8000/users/${authUser?.id}/skills/${skillId}`, { method: "DELETE" });
+            const res = await fetch(`${API_URL}/users/${authUser?.id}/skills/${skillId}`, { method: "DELETE" });
             if (!res.ok) throw new Error("Error al eliminar skill");
             fetchUserSkills();
             alert("Skill eliminada");
@@ -134,7 +135,7 @@ export default function Profile() {
     const handleDeleteService = async (serviceId) => {
         if (!window.confirm("¿Eliminar este servicio?")) return;
         try {
-            const res = await fetch(`http://localhost:8000/services/${serviceId}`, { method: "DELETE" });
+            const res = await fetch(`${API_URL}/services/${serviceId}`, { method: "DELETE" });
             if (!res.ok) throw new Error("Error al eliminar servicio");
             fetchUserServices();
             alert("Servicio eliminado");
@@ -157,7 +158,7 @@ export default function Profile() {
 
     const handleUpdateService = async (serviceId) => {
         try {
-            const res = await fetch(`http://localhost:8000/services/${serviceId}`, {
+            const res = await fetch(`${API_URL}/services/${serviceId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -180,7 +181,7 @@ export default function Profile() {
 
     const handleAddService = async () => {
         try {
-            const res = await fetch("http://localhost:8000/services/", {
+            const res = await fetch(`${API_URL}/services/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -240,7 +241,7 @@ export default function Profile() {
             if (window.confirm('¿Guardar nueva foto de perfil?')) {
                 setLoading(true);
                 try {
-                    const res = await fetch(`http://localhost:8000/users/${authUser?.id}`, {
+                    const res = await fetch(`${API_URL}/users/${authUser?.id}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ profile_picture_url: base64String }),
@@ -265,7 +266,7 @@ export default function Profile() {
 
     const handleUpdateProfile = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/users/${authUser?.id}`, {
+            const res = await fetch(`${API_URL}/users/${authUser?.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -289,14 +290,14 @@ export default function Profile() {
 
     const handleUpdateJobStatus = async (jobId, newStatus) => {
         try {
-            let url = `http://localhost:8000/jobs/${jobId}/status?status=${newStatus}`;
+            let url = `${API_URL}/jobs/${jobId}/status?status=${newStatus}`;
             let body = null;
 
             if (newStatus === 'en_progreso') {
-                url = `http://localhost:8000/jobs/${jobId}/accept`;
+                url = `${API_URL}/jobs/${jobId}/accept`;
                 body = JSON.stringify({ user_id: authUser.id });
             } else if (newStatus === 'completado') {
-                url = `http://localhost:8000/jobs/${jobId}/complete`;
+                url = `${API_URL}/jobs/${jobId}/complete`;
                 body = JSON.stringify({ user_id: authUser.id });
             }
 

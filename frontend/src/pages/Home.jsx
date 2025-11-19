@@ -14,6 +14,7 @@ import {
   FaTimes,
   FaUser
 } from "react-icons/fa";
+import { API_URL } from "../api/client";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function Home() {
   // Fetch all skills/categories
   const fetchSkills = async () => {
     try {
-      const res = await fetch("http://localhost:8000/skills/");
+      const res = await fetch(`${API_URL}/skills/`);
       if (!res.ok) throw new Error("Error al cargar categorías");
       const data = await res.json();
       setSkills(Array.isArray(data) ? data : []);
@@ -57,7 +58,7 @@ export default function Home() {
         ...(minRating && { min_rating: minRating }),
       });
 
-      const res = await fetch(`http://localhost:8000/services/search?${params}`);
+      const res = await fetch(`${API_URL}/services/search?${params}`);
       if (!res.ok) throw new Error("Error en la solicitud al backend");
       let data = await res.json();
       data = Array.isArray(data) ? data : [];

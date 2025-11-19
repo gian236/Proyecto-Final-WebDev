@@ -19,6 +19,7 @@ import {
     FaSave,
     FaTimes
 } from "react-icons/fa";
+import { API_URL } from "../api/client";
 
 export default function Job() {
     const { serviceId } = useParams();
@@ -62,7 +63,7 @@ export default function Job() {
 
     const fetchReviews = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/reviews/service/${serviceId}`);
+            const res = await fetch(`${API_URL}/reviews/service/${serviceId}`);
             if (res.ok) {
                 const data = await res.json();
                 setReviews(data);
@@ -75,9 +76,9 @@ export default function Job() {
     const checkUserJob = async () => {
         if (!authUser) return;
         try {
-            let url = `http://localhost:8000/jobs/contractor/${authUser.id}`;
+            let url = `${API_URL}/jobs/contractor/${authUser.id}`;
             if (isOwner) {
-                url = `http://localhost:8000/jobs/vendor/${authUser.id}`;
+                url = `${API_URL}/jobs/vendor/${authUser.id}`;
             }
 
             const res = await fetch(url);
@@ -97,7 +98,7 @@ export default function Job() {
     const fetchUserSkills = async () => {
         if (!authUser) return;
         try {
-            const res = await fetch(`http://localhost:8000/users/${authUser.id}/skills`);
+            const res = await fetch(`${API_URL}/users/${authUser.id}/skills`);
             if (!res.ok) throw new Error('Error al cargar skills');
             const data = await res.json();
             setUserSkills(Array.isArray(data) ? data : []);
@@ -111,7 +112,7 @@ export default function Job() {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch(`http://localhost:8000/services/${serviceId}`);
+            const res = await fetch(`${API_URL}/services/${serviceId}`);
             if (!res.ok) {
                 throw new Error("No se pudo cargar el servicio");
             }
@@ -156,7 +157,7 @@ export default function Job() {
         }
 
         try {
-            const res = await fetch("http://localhost:8000/jobs/", {
+            const res = await fetch(`${API_URL}/jobs/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -185,7 +186,7 @@ export default function Job() {
     const handleAcceptJob = async () => {
         if (!userJob) return;
         try {
-            const res = await fetch(`http://localhost:8000/jobs/${userJob.id}/accept`, {
+            const res = await fetch(`${API_URL}/jobs/${userJob.id}/accept`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_id: authUser.id })
@@ -203,7 +204,7 @@ export default function Job() {
     const handleCompleteJob = async () => {
         if (!userJob) return;
         try {
-            const res = await fetch(`http://localhost:8000/jobs/${userJob.id}/complete`, {
+            const res = await fetch(`${API_URL}/jobs/${userJob.id}/complete`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_id: authUser.id })
@@ -227,7 +228,7 @@ export default function Job() {
         if (!userJob) return;
 
         try {
-            const res = await fetch("http://localhost:8000/reviews/", {
+            const res = await fetch(`${API_URL}/reviews/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -258,7 +259,7 @@ export default function Job() {
 
     const handleSaveEdit = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/services/${serviceId}`, {
+            const res = await fetch(`${API_URL}/services/${serviceId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -283,7 +284,7 @@ export default function Job() {
         if (!window.confirm("¿Estás seguro de que quieres eliminar este servicio?")) return;
 
         try {
-            const res = await fetch(`http://localhost:8000/services/${serviceId}`, {
+            const res = await fetch(`${API_URL}/services/${serviceId}`, {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Error al eliminar servicio");

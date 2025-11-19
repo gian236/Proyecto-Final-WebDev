@@ -1,6 +1,7 @@
 // src/pages/Onboarding.jsx
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { API_URL } from "../api/client";
 
 export default function Onboarding({ userId, onComplete }) {
   const [skills, setSkills] = useState([]);
@@ -12,7 +13,7 @@ export default function Onboarding({ userId, onComplete }) {
 
   // Traer skills desde backend
   useEffect(() => {
-    fetch("http://localhost:8000/skills/")
+    fetch(`${API_URL}/skills/`)
       .then(res => res.json())
       .then(data => setSkills(data))
       .catch(() => setError("No se pudieron cargar las skills"));
@@ -49,7 +50,7 @@ export default function Onboarding({ userId, onComplete }) {
     try {
       // 1️⃣ Asociar todas las skills en un solo POST
       if (selectedSkills.length > 0) {
-        const res = await fetch(`http://localhost:8000/users/${userId}/skills`, {
+        const res = await fetch(`${API_URL}/users/${userId}/skills`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ skill_ids: selectedSkills }), // <-- enviamos objeto con skill_ids
@@ -61,7 +62,7 @@ export default function Onboarding({ userId, onComplete }) {
       // 2️⃣ Crear servicios
       for (let service of services) {
         if (!service.title || !service.price || !service.skill_id) continue;
-        await fetch("http://localhost:8000/services/", {
+        await fetch(`${API_URL}/services/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -76,7 +77,7 @@ export default function Onboarding({ userId, onComplete }) {
       }
 
       // 3️⃣ Obtener datos del usuario y guardar sesión
-      const userRes = await fetch(`http://localhost:8000/users/${userId}`);
+      const userRes = await fetch(`${API_URL}/users/${userId}`);
       if (userRes.ok) {
         const userData = await userRes.json();
         login("fake-jwt-token", userData);
