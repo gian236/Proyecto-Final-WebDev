@@ -31,7 +31,7 @@ class User(Base):
 
 
 # ==========================
-# 2️⃣ Habilidad
+# Habilidad
 # ==========================
 class Skill(Base):
     __tablename__ = "skills"
@@ -44,7 +44,7 @@ class Skill(Base):
 
 
 # ==========================
-# 3️⃣ Relación Usuario-Habilidad
+# Relación Usuario-Habilidad
 # ==========================
 class UserSkill(Base):
     __tablename__ = "user_skills"
@@ -57,7 +57,7 @@ class UserSkill(Base):
 
 
 # ==========================
-# 4️⃣ Servicio
+#  Servicio
 # ==========================
 class Service(Base):
     __tablename__ = "services"
@@ -79,7 +79,7 @@ class Service(Base):
 
 
 # ==========================
-# 5️⃣ Trabajo
+# Trabajo
 # ==========================
 class Job(Base):
     __tablename__ = "jobs"
@@ -104,7 +104,7 @@ class Job(Base):
 
 
 # ==========================
-# 6️⃣ Reseña
+# Reseña
 # ==========================
 class Review(Base):
     __tablename__ = "reviews"
@@ -119,7 +119,7 @@ class Review(Base):
 
 
 # ==========================
-# 7️⃣ Pago
+# Pago
 # ==========================
 class Payment(Base):
     __tablename__ = "payments"
